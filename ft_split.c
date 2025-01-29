@@ -65,14 +65,14 @@ static int	count_word(char const *str, char sep)
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		j;
-	char	**res;
-	int		count;
+	int i;
+	int j;
+	char **res;
+	int count;
 
-	i = 0 ;
-	j = 0 ;
-	count = count_word(s,c);
+	i = 0;
+	j = 0;
+	count = count_word(s, c);
 	if (!count)
 		return (NULL);
 	res = malloc((count + 1) * sizeof(char *));

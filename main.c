@@ -6,83 +6,73 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:31:55 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/01/28 20:16:51 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:28:01 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include "pipe.h"   
+#include "pipe.h"
 
-
-char *get_env(char **env)
+char	*get_env(char **env)
 {
-    int i;
-    char *res;
-    
-    i = 0;
-    res = NULL;
-    while (env[i]) {
-        if (ft_strncmp(env[i],"PATH=",5) == 0)
-        {
-            res = ft_strdup(env[i] + 5);
-            break;
-        }
-        i++;
-    }
-    return res;
+	int		i;
+	char	*res;
+
+	i = 0;
+	res = NULL;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+		{
+			res = ft_strdup(env[i] + 5);
+			break ;
+		}
+		i++;
+	}
+	return (res);
 }
 
-
-void handeler(char **av, char ** env)
+void	handeler(char **av, char **env)
 {
-    int  fd[2];
-    int i = 0;
-    char *test;
-    char **cmd1;
-    
-    if (pipe(fd) == -1 )
-        perror("error : ");
-    cmd1 = ft_split_v2(av[1]);
-    while (cmd1[i])
-    {
-        printf("%s",cmd1[i]);
-        i++;
-    }
-    
-    if (!cmd1)
-        return(free(cmd1));
-    int pid1 = fork();
-    if (pid1 < 0)
-        return ;
-    if (pid1 == 0 )
-    {
-        while (env[i])
-        {
-            test = ft_strjoin(env[i],"/");
-            test = ft_strjoin(test , cmd1[0]);
-            execve(test, cmd1, NULL);
-            free(test);
-            i++;
-        }
-    }else {
-        // hada P
+	int		fd[2];
+	int		i;
+	char	*test;
+	char	**cmd1;
+	int		pid1;
 
-    }
-    waitpid(pid1,NULL,0);
+	i = 0;
+	if (pipe(fd) == -1)
+		perror("error : ");
+	cmd1 = ft_split_v2(av[1]);
+	if (!cmd1)
+		return (free(cmd1));
+	pid1 = fork();
+	if (pid1 < 0)
+		return ;
+	if (pid1 == 0)
+	{
+		while (env[i])
+		{
+			test = ft_strjoin(env[i], "/");
+			test = ft_strjoin(test, cmd1[0]);
+			execve(test, cmd1, NULL);
+			free(test);
+			i++;
+		}
+	}
+	else
+	{
+		// hada P
+	}
+	waitpid(pid1, NULL, 0);
 }
 
-
-int main(int ac , char *av[], char *env[])
+int	main(int ac, char *av[], char *env[])
 {
-    
-    char *str = get_env(env);
-    char **res;
-    res = ft_split(str,':');
-    int i = 0;
-    handeler(av,res);
-    
-    return 0;
+	char *str = get_env(env);
+	char **res;
+	res = ft_split(str, ':');
+	int i = 0;
+	handeler(av, res);
+
+	return (0);
 }
