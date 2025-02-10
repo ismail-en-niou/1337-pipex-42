@@ -6,13 +6,13 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:34:21 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/01/28 20:02:32 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:34:43 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
 
-static void	*ft_free(char **res, int j)
+void	*ft_free(char **res, int j)
 {
 	while (j > 0)
 		free(res[--j]);
@@ -65,14 +65,12 @@ static int	count_word(char const *str, char sep)
 
 char	**ft_split(char const *s, char c)
 {
-	int i;
-	int j;
-	char **res;
-	int count;
+	int		i;
+	int		j;
+	char	**res;
+	int		count;
 
-	i = 0;
-	j = 0;
-	count = count_word(s, c);
+	count = ((i = 0), (j = 0), count_word(s, c));
 	if (!count)
 		return (NULL);
 	res = malloc((count + 1) * sizeof(char *));

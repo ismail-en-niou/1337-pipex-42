@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 10:07:20 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/08 11:44:24 by ien-niou         ###   ########.fr       */
+/*   Created: 2024/10/27 12:09:31 by ien-niou          #+#    #+#             */
+/*   Updated: 2025/02/03 16:22:59 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	len;
-	char	*res;
-
-	len = ft_strlen(s1);
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	(ft_memcpy(res, s1, len), res[len] = '\0');
-	return (res);
+	if (!s)
+		return ;
+	write(fd, s, ft_strlen(s));
 }

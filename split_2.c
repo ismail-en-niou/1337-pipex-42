@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:18:09 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/01/29 13:26:48 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:37:17 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,23 @@ char	*extract_token(int *i, char *str, char delimiter)
 	int		start;
 	int		len;
 	char	*res;
-	int		x;
 
-	if (!ft_delimeter(*i, str, delimiter) || !str)
+	if (!str)
 		return (NULL);
-	start = (*i) + 1;
+	start = *i;
 	len = 0;
-	if (delimiter == ' ')
-		x = 2;
-	else
-		x = 3;
-	while (str[start] && str[start] != delimiter)
-	{
+	if (str[start] == '"' || str[start] == '\'')
 		start++;
+	while (str[start + len] && str[start + len] != delimiter)
 		len++;
-	}
-	res = malloc(len + x);
-	ft_strlcpy(res, &str[*(i)], len + x);
-	*i = start;
+	res = malloc(len + 1);
+	if (!res)
+		return (NULL);
+	ft_strlcpy(res, &str[start], len + 1);
+	if (str[start + len] == delimiter)
+		*i = start + len + 1;
+	else
+		*i = start + len;
 	return (res);
 }
 
@@ -60,7 +59,7 @@ char	**ft_split_v2(char *str)
 
 	count = ((j = 0), (i = 0), ft_tokens(str));
 	arr = (char **)malloc(sizeof(char *) * (count + 1));
-	if (arr == NULL)
+	if (!arr)
 		return (NULL);
 	while (str[i] != '\0')
 	{
@@ -69,13 +68,10 @@ char	**ft_split_v2(char *str)
 		if (str[i] == '\0')
 			break ;
 		if (str[i] == '"' || str[i] == '\'')
-		{
 			arr[j++] = extract_token(&i, str, str[i]);
-			if (arr[j] == NULL)
-				break ;
-		}
 		else
 			arr[j++] = extract_token(&i, str, ' ');
 	}
-	return ((arr[j] = NULL), arr);
+	return (arr[j] = NULL, arr);
 }
+
