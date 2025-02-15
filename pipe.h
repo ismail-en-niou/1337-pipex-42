@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:17:43 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/10 20:38:30 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:25:03 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@ typedef struct s_cmd
 {
 	char	*path;
 	char	**args;
-	int		fd;
 	int		my_size;
+	char	**env;
 	int		ac;
+	int		index;
 	char	**av;
 }			t_cmd;
 
 char		*ft_strjoin(char const *s1, char const *s2);
-void		do_pipe(int *fd);
+int			do_pipe(int *fd);
 int			ft_open_file(char *file, int mode);
 void		execute_command(t_cmd *cmd, char **env);
-void		handle_pipex(char **av, char *env_path, int ac);
+void		handle_pipex(char **av, char *_env, int ac, char **env);
 char		*ft_get_env(char **env);
 void		*ft_free(char **res, int j);
 char		*ft_find_cmd_path(char *cmd, char **paths);
@@ -57,4 +58,12 @@ char		**ft_split_v2(char *str);
 void		ft_putstr_fd(char *s, int fd);
 char		*ft_strtrim(char const *s1, char const *set);
 void		ft_handler(char *av[], char *env[], int *fd);
+void		trim_quotes_and_spaces(char **av);
+char		*ft_find_cmd_path(char *cmd, char **paths);
+char		*ft_get_env(char **env);
+pid_t		do_fork(void);
+void		execute_command(t_cmd *cmd, char **env);
+void		childhandler(t_cmd *cmds, char **env, int fd_in, int fd_out);
+int			do_pipe(int *fd);
+void	free_cmds(t_cmd *cmds, int size);
 #endif // PIPE_H

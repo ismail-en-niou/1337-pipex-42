@@ -1,6 +1,7 @@
 NAME = pipex
 CC = cc
-FLAGS = -Wall -Werror -Wextra -fsanitize=address
+FLAGS = -Wall -Werror -Wextra 
+
 RM = rm -rf
 
 GREEN = \033[0;32m
@@ -17,6 +18,7 @@ SRC = $(filter-out $(SRC_DIR)/main.c, $(wildcard $(SRC_DIR)/*.c))
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
+
 
 $(NAME): $(OBJ) $(MAIN)
 	@$(CC) $(FLAGS) $(OBJ) $(MAIN) -o $(NAME)
@@ -37,7 +39,7 @@ re: fclean all
 	@echo "$(CYAN)Rebuilding everything...$(RESET)"
 
 bonus: $(BONUS_SRC:.c=.o)
-	@$(CC) $(FLAGS) $(BONUS_SRC:.c=.o) -o $(NAME)_bonus
-	@echo "$(GREEN)Bonus compilation successful!$(RESET)"
+	$(CC) $(FLAGS) $(BONUS_SRC:.c=.o) -o $(NAME)_bonus
+	echo "$(GREEN)Bonus compilation successful!$(RESET)"
 
 .PHONY: all clean fclean re bonus
