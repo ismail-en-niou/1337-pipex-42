@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:01:30 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/15 12:03:13 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:52:38 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,28 @@ char	*ft_find_cmd_path(char *cmd, char **paths)
 
 void	trim_quotes_and_spaces(char **av)
 {
-	int	i;
+	int     i;
+    char    *tmp;
 
 	i = 0;
 	while (av[i] != NULL)
 	{
-		av[i] = ft_strtrim(av[i], "'\"");
-		if (av[i] && av[i][0] == ' ')
+		tmp = ft_strtrim(av[i], "'\"");
+		if (!tmp)
+			return;
+		free(av[i]);
+		av[i] = tmp;
+		if (av[i][0] == ' ')
 		{
 			free(av[i]);
-			av[i] = NULL;
-			break ;
+			av[i] = ft_strdup("");
+			if (!av[i])
+				return;
 		}
 		i++;
 	}
 }
+
 
 int	ft_open_file(char *file, int mode)
 {
