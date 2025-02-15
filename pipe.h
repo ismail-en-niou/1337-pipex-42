@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:17:43 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/15 12:25:03 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:36:47 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_cmd
 }			t_cmd;
 
 char		*ft_strjoin(char const *s1, char const *s2);
+void		free_splitv2(char **arr, int j);
 int			do_pipe(int *fd);
 int			ft_open_file(char *file, int mode);
 void		execute_command(t_cmd *cmd, char **env);

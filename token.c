@@ -6,11 +6,18 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:59:01 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/01/29 13:27:18 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:36:38 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
+
+void	free_splitv2(char **arr, int j)
+{
+	while (j >= 0)
+		free(arr[j--]);
+	free(arr);
+}
 
 int	ft_travers(int i, const char *str, char delimiter)
 {

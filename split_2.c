@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:18:09 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/15 12:27:27 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:40:49 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	*extract_token(int *i, char *str, char delimiter)
 	return (res);
 }
 
+
 char	**ft_split_v2(char *str)
 {
 	int		count;
@@ -61,16 +62,20 @@ char	**ft_split_v2(char *str)
 	arr = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!arr)
 		return (NULL);
-	while (str[i] != '\0')
+	while (str[i] != '\0' && j < count)
 	{
 		while (str[i] == ' ')
 			i++;
 		if (str[i] == '\0')
 			break ;
 		if (str[i] == '"' || str[i] == '\'')
-			arr[j++] = extract_token(&i, str, str[i]);
+			arr[j] = extract_token(&i, str, str[i]) ;
 		else
-			arr[j++] = extract_token(&i, str, ' ');
+			arr[j] = extract_token(&i, str, ' ');
+		if (!arr[j])
+			return (free_splitv2(arr, j - 1), NULL);
+		j++;
 	}
-	return (arr[j] = NULL, arr);
+	arr[j] = NULL;
+	return (arr);
 }
