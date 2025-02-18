@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:01:30 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/15 12:52:38 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:08:44 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ char	*ft_find_cmd_path(char *cmd, char **paths)
 
 void	trim_quotes_and_spaces(char **av)
 {
-	int     i;
-    char    *tmp;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	while (av[i] != NULL)
 	{
 		tmp = ft_strtrim(av[i], "'\"");
 		if (!tmp)
-			return;
+			return ;
 		free(av[i]);
 		av[i] = tmp;
 		if (av[i][0] == ' ')
@@ -70,12 +70,11 @@ void	trim_quotes_and_spaces(char **av)
 			free(av[i]);
 			av[i] = ft_strdup("");
 			if (!av[i])
-				return;
+				return ;
 		}
 		i++;
 	}
 }
-
 
 int	ft_open_file(char *file, int mode)
 {
@@ -91,4 +90,27 @@ int	ft_open_file(char *file, int mode)
 		exit(1);
 	}
 	return (fd);
+}
+
+void	wait_tt(int i, int **pids, int size, int flag)
+{
+	if (flag == 0)
+	{
+		*pids = malloc(sizeof(pid_t) * size);
+		if (!(*pids))
+		{
+			perror("malloc failed");
+			exit(1);
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < size)
+		{
+			waitpid((*pids)[i], NULL, 0);
+			i++;
+		}
+		free(*pids);
+	}
 }

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.h                                             :+:      :+:    :+:   */
+/*   pipe_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 20:17:43 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/15 12:36:47 by ien-niou         ###   ########.fr       */
+/*   Created: 2025/02/17 11:42:44 by ien-niou          #+#    #+#             */
+/*   Updated: 2025/02/18 10:03:17 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_H
-# define PIPE_H
+#ifndef PIPE_BONUS_H
+# define PIPE_BONUS_H
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -27,10 +27,13 @@ typedef struct s_cmd
 	int		ac;
 	int		index;
 	char	**av;
+	int		fd_in;
+	int		fd_out;
 }			t_cmd;
 
 char		*ft_strjoin(char const *s1, char const *s2);
 void		free_splitv2(char **arr, int j);
+void		wait_tt(int i, int **pids, int size, int flag);
 int			do_pipe(int *fd);
 int			ft_open_file(char *file, int mode);
 void		execute_command(t_cmd *cmd, char **env);
@@ -66,5 +69,5 @@ pid_t		do_fork(void);
 void		execute_command(t_cmd *cmd, char **env);
 void		childhandler(t_cmd *cmds, char **env, int fd_in, int fd_out);
 int			do_pipe(int *fd);
-void	free_cmds(t_cmd *cmds, int size);
+void		free_cmds(t_cmd *cmds, int size);
 #endif // PIPE_H

@@ -50,7 +50,6 @@ char	*extract_token(int *i, char *str, char delimiter)
 	return (res);
 }
 
-
 char	**ft_split_v2(char *str)
 {
 	int		count;
@@ -69,7 +68,7 @@ char	**ft_split_v2(char *str)
 		if (str[i] == '\0')
 			break ;
 		if (str[i] == '"' || str[i] == '\'')
-			arr[j] = extract_token(&i, str, str[i]) ;
+			arr[j] = extract_token(&i, str, str[i]);
 		else
 			arr[j] = extract_token(&i, str, ' ');
 		if (!arr[j])

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   logic.c                                            :+:      :+:    :+:   */
+/*   logic_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:05:01 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/15 12:30:16 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/18 09:14:30 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipe.h"
+#include "pipe_bonus.h"
 
 pid_t	do_fork(void)
 {
@@ -70,7 +70,7 @@ int	do_pipe(int *fd)
 
 void	free_cmds(t_cmd *cmds, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)
