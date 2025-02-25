@@ -1,6 +1,6 @@
 NAME = pipex
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 RM = rm -rf
 
@@ -33,7 +33,9 @@ SRC_BONUS = ./src_bonus/ft_memcpy_bonus.c  		./src_bonus/ft_split_bonus.c  \
 			./src_bonus/ft_putstr_fd_bonus.c    ./src_bonus/ft_strdup_bonus.c  \
 			./src_bonus/ft_strlcat_bonus.c      ./src_bonus/ft_strlen_bonus.c  \
 			./src_bonus/ft_strnstr_bonus.c      ./src_bonus/ft_substr_bonus.c  \
-			./src_bonus/logic_bonus.c   		./src_bonus/token_bonus.c
+			./src_bonus/logic_bonus.c   		./src_bonus/token_bonus.c\
+			./src_bonus/ft_itoa.c				./getline/get_next_line_bonus.c \
+			./getline/get_next_line_utils_bonus.c ./src_bonus/here_doc.c
 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
@@ -53,11 +55,11 @@ $(BONUS_FLAG): $(OBJ_BONUS) $(MAIN_BONUS)
 	@touch $(BONUS_FLAG)
 	@echo "$(GREEN)Bonus compilation successful!$(RESET)"
 
-%.o: %.c ./src/pipe.h ./src_bonus/pipe_bonus.h
+%.o: %.c ./src/pipe.h ./src_bonus/pipe_bonus.h ./getline/get_next_line_bonus.h
 	@$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(SRC_DIR)/*.o $(SRC_DIR_BONUS)/*.o
+	@$(RM) $(SRC_DIR)/*.o $(SRC_DIR_BONUS)/*.o ./getline/*.o
 	@$(RM) $(BONUS_FLAG)
 	@echo "$(YELLOW)Object files removed.$(RESET)"
 

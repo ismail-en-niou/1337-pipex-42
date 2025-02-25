@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:22:14 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/17 09:17:13 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:02:51 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	end = ft_strlen(s1);
 	while (end > start && ft_set((char *)set, s1[end - 1]))
 		end--;
-	trimmed = ft_substr(s1, start, end - start);
+	trimmed = ft_substr((char *)s1, start, end - start);
 	return (trimmed);
 }
