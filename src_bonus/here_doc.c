@@ -100,6 +100,7 @@ void	handel_herdoc(char **av, char *env_path, int ac, char **env)
 
 	here_doc = ft_strjoin(ft_rand(), ".txt");
 	av[1] = ft_strjoin("/tmp/", here_doc);
+	free(here_doc);
 	fd = ft_open_file(av[1], 1);
     write(0,"=> ",4);
 	line = get_next_line(0);
@@ -107,16 +108,14 @@ void	handel_herdoc(char **av, char *env_path, int ac, char **env)
 	{
 		if (ft_strncmp(line, av[2], ft_strlen(av[2])) == 0
 			&& line[ft_strlen(av[2])] == '\n')
-		{
-			free(line);
 			break ;
-		}
         write(0,"=> ",4);
 		write(fd, line, ft_strlen(line));
 		free(line);
 		line = get_next_line(0);
 	}
+	free(line);
 	close(fd);
-	free(here_doc);
+	free(av[1]);
 	handle_pipex_here(av, env_path, ac, env);
 }

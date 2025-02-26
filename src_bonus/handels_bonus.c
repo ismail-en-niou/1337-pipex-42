@@ -80,6 +80,8 @@ int	ft_open_file(char *file, int mode)
 {
 	int	fd;
 
+	if (!file)
+		return (-1);
 	if (mode == 0)
 		fd = open(file, O_RDONLY);
 	else if (mode == 2)

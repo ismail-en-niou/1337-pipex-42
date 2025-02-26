@@ -80,10 +80,7 @@ char	*ft_strdup_get(char *s1)
 	len = ft_strlen_get(s1);
 	res = (char *)malloc(len + 1);
 	if (!res)
-	{
-		free(res);
 		return (NULL);
-	}
 	i = 0;
 	while (i < len)
 	{

@@ -14,6 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 # include <stdlib.h>
 # include <unistd.h>
+#include "../src_bonus/pipe_bonus.h"
 
 char	*get_next_line(int fd);
 char	*ft_strdup_get(char *s);

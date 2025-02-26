@@ -90,16 +90,10 @@ void	handle_pipex(char **av, char *env_path, int ac, char **env)
 	free(all_cmds);
 }
 
-void vv()
-{
-	system("leaks pipex");
-}
-
 int	main(int ac, char *av[], char *env[])
 {
 	char	*env_path;
 
-	atexit(vv);
 	if (ac < 5)
 	{
 		ft_putstr_fd("Usage: ./pipex infile cmd1 cmd2 ... cmdN outfile\n", 2);
