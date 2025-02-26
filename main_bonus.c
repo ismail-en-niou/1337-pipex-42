@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:10:07 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:57:09 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:41:43 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,16 @@ void	handle_cmds(t_cmd *cmds, int fd_in, int fd_out)
 		if (i < cmds[0].my_size - 1 && do_pipe(fd) == -1)
 			exit(1);
 		pids[i] = do_fork();
-		cmds[i].fd_in = fd_prev;
-		cmds[i].fd_out = fd_out;
+		cmds[i].fd_in = ((cmds[i].fd_out = fd_out), fd_prev);
 		if (pids[i] == 0)
 			handle_child_process(cmds, fd, i);
 		if (fd_prev != fd_in)
 			close(fd_prev);
 		if (i < cmds[0].my_size - 1)
-		{
-			close(fd[1]);
-			fd_prev = fd[0];
-		}
+			fd_prev = (close(fd[1]), fd[0]);
 	}
+	close(fd_in);
+	close(fd_out);
 	wait_tt(-1, &pids, cmds[0].my_size - 1, 1);
 }
 

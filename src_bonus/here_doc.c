@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:47:02 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:58:48 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:42:39 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,16 @@ void	handle_cmds_here(t_cmd *cmds, int fd_in, int fd_out)
 		if (i < cmds[0].my_size - 1 && do_pipe(fd) == -1)
 			exit(1);
 		pids[i] = do_fork();
-		cmds[i].fd_in = fd_prev;
-		cmds[i].fd_out = fd_out;
+		cmds[i].fd_in = ((cmds[i].fd_out = fd_out), fd_prev);
 		if (pids[i] == 0)
 			handle_child_process(cmds, fd, i);
 		if (fd_prev != fd_in)
 			close(fd_prev);
 		if (i < cmds[0].my_size - 1)
-		{
-			close(fd[1]);
-			fd_prev = fd[0];
-		}
+			fd_prev = (close(fd[1]), fd[0]);
 	}
+	close(fd_in);
+	close(fd_out);
 	wait_tt(-1, &pids, cmds[0].my_size - 1, 1);
 }
 
@@ -96,26 +94,27 @@ void	handel_herdoc(char **av, char *env_path, int ac, char **env)
 {
 	char	*here_doc;
 	int		fd;
+	char	*rand;
 	char	*line;
 
-	here_doc = ft_strjoin(ft_rand(), ".txt");
+	here_doc = ((rand = ft_rand()), ft_strjoin(rand, ".txt"));
+	free(rand);
 	av[1] = ft_strjoin("/tmp/", here_doc);
 	free(here_doc);
 	fd = ft_open_file(av[1], 1);
-    write(0,"=> ",4);
+	write(0, "=> ", 4);
 	line = get_next_line(0);
 	while (line)
 	{
-		if (ft_strncmp(line, av[2], ft_strlen(av[2])) == 0
+		write(fd, line, ft_strlen(line));
+		if (!ft_strncmp(line, av[2], ft_strlen(av[2]))
 			&& line[ft_strlen(av[2])] == '\n')
 			break ;
-        write(0,"=> ",4);
-		write(fd, line, ft_strlen(line));
 		free(line);
+		write(2, "=> ", 4);
 		line = get_next_line(0);
 	}
 	free(line);
 	close(fd);
-	free(av[1]);
 	handle_pipex_here(av, env_path, ac, env);
 }
