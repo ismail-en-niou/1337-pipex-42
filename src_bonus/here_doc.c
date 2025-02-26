@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:47:02 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/25 15:58:53 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:58:48 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ void	handel_herdoc(char **av, char *env_path, int ac, char **env)
 		line = get_next_line(0);
 	}
 	close(fd);
+	free(here_doc);
 	handle_pipex_here(av, env_path, ac, env);
 }

@@ -1,6 +1,6 @@
 NAME = pipex
 CC = cc
-FLAGS = -Wall -Werror -Wextra -fsanitize=address
+FLAGS = -Wall -Werror -Wextra
 
 RM = rm -rf
 
@@ -34,7 +34,7 @@ SRC_BONUS = ./src_bonus/ft_memcpy_bonus.c  		./src_bonus/ft_split_bonus.c  \
 			./src_bonus/ft_strlcat_bonus.c      ./src_bonus/ft_strlen_bonus.c  \
 			./src_bonus/ft_strnstr_bonus.c      ./src_bonus/ft_substr_bonus.c  \
 			./src_bonus/logic_bonus.c   		./src_bonus/token_bonus.c\
-			./src_bonus/ft_itoa.c				./getline/get_next_line_bonus.c \
+			./src_bonus/ft_itoa_bonus.c				./getline/get_next_line_bonus.c \
 			./getline/get_next_line_utils_bonus.c ./src_bonus/here_doc.c
 
 OBJ = $(SRC:.c=.o)

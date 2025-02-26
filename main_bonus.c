@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:10:07 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/25 15:57:39 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:57:09 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,16 @@ void	handle_pipex(char **av, char *env_path, int ac, char **env)
 	free(all_cmds);
 }
 
+void vv()
+{
+	system("leaks pipex");
+}
+
 int	main(int ac, char *av[], char *env[])
 {
 	char	*env_path;
 
+	atexit(vv);
 	if (ac < 5)
 	{
 		ft_putstr_fd("Usage: ./pipex infile cmd1 cmd2 ... cmdN outfile\n", 2);
@@ -105,7 +111,7 @@ int	main(int ac, char *av[], char *env[])
 		ft_putstr_fd("Error: PATH not found in environment\n", 2);
 		return (3);
 	}
-	if (ft_strncmp(av[1], "here_doc", 9) == 0 && ac > 5)
+	if (ft_strncmp(av[1], "here_doc", 9) == 0 && ac > 4)
 		handel_herdoc(av, env_path, ac, env);
 	else
 		handle_pipex(av, env_path, ac, env);
