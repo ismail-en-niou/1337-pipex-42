@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:10:07 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/26 11:41:51 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:23:02 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ size_t	take_size(char **s)
 
 static void	handle_child_process(t_cmd *cmds, int *fd, int i)
 {
+	if (cmds->fd_in == -1 || cmds->fd_out == -1)
+		exit(1);
 	if (i < cmds[0].my_size - 1)
 		close(fd[0]);
 	if (i == cmds[0].my_size - 1)

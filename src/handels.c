@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:01:30 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/25 15:42:21 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:23:33 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ int	ft_open_file(char *file, int mode)
 	else
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC);
 	if (fd == -1)
-	{
 		perror("Error opening file");
-		exit(1);
-	}
 	return (fd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:10:07 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/02/26 11:41:43 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/03/01 13:22:55 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ size_t	take_size(char **s)
 
 void	handle_child_process(t_cmd *cmds, int *fd, int i)
 {
+	if (cmds->fd_in == -1 || cmds->fd_out == -1)
+		exit(1);
 	if (i < cmds[0].my_size - 1)
 		close(fd[0]);
 	if (i == cmds[0].my_size - 1)
@@ -104,7 +106,10 @@ int	main(int ac, char *av[], char *env[])
 		return (3);
 	}
 	if (ft_strncmp(av[1], "here_doc", 9) == 0 && ac > 4)
+	{
 		handel_herdoc(av, env_path, ac, env);
+		unlink(av[1]);
+	}		
 	else
 		handle_pipex(av, env_path, ac, env);
 	free(env_path);

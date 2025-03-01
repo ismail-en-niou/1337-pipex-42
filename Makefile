@@ -35,7 +35,7 @@ SRC_BONUS = ./src_bonus/ft_memcpy_bonus.c  		./src_bonus/ft_split_bonus.c  \
 			./src_bonus/ft_strnstr_bonus.c      ./src_bonus/ft_substr_bonus.c  \
 			./src_bonus/logic_bonus.c   		./src_bonus/token_bonus.c\
 			./src_bonus/ft_itoa_bonus.c				./getline/get_next_line_bonus.c \
-			./getline/get_next_line_utils_bonus.c ./src_bonus/here_doc.c
+			./getline/get_next_line_utils_bonus.c ./src_bonus/here_doc_bonus.c
 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
