@@ -6,7 +6,7 @@
 /*   By: ien-niou <ien-niou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:10:07 by ien-niou          #+#    #+#             */
-/*   Updated: 2025/03/01 13:22:55 by ien-niou         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:11:02 by ien-niou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int ac, char *av[], char *env[])
 	{
 		handel_herdoc(av, env_path, ac, env);
 		unlink(av[1]);
-	}		
+	}
 	else
 		handle_pipex(av, env_path, ac, env);
 	free(env_path);
